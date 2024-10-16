@@ -36,7 +36,7 @@ To run this application, you need:
    - **Payload**:
      ```json
      {
-       "name": "flute Music",
+       "name": "Flute Music Session",
        "startDate": "2024-12-01",
        "endDate": "2024-12-20",
        "capacity": 60
