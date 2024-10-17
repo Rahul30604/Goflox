@@ -44,14 +44,13 @@ public class ClassesController {
 	}
 	
 	@PostMapping("/classes")
-	public ResponseEntity<String> creatingClasses(@Valid @RequestBody Classes obj) {
+	public ResponseEntity<String> creatingClasses(@RequestBody Classes obj) throws Exception {
+		
+		if(obj.getEndDate().isBefore(obj.getStartDate()) || obj.getClassName().isEmpty() ) {
+			throw new Exception();
+		}
+		
 		service.createClass(obj);
-		if(obj.getEndDate().isBefore(obj.getStartDate()) ) {
-			return new ResponseEntity<>(("Please check the Dates given"),HttpStatus.BAD_REQUEST);
-		}
-		else if(obj.getClassName().isEmpty()) {
-			return new ResponseEntity<>(("Check Name of class it should be of atleast '2' characters"),HttpStatus.BAD_REQUEST);
-		}
 		return new ResponseEntity<> (("Class has been created"),HttpStatus.CREATED);
 	}
 	
