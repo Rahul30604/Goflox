@@ -64,7 +64,6 @@ To run this application, you need:
    - **Response**: 
      - `201 CREATED` on success.
      - `409 CONFLICT` if the class or slots are unavailable.
-     -UNDERCONSTRUCTION
 
 ## Managing Class Slots
 
