@@ -6,7 +6,6 @@ This is a Spring Boot-based API application that allows studio owners to manage 
 ## Features
 
 - Create new classes with capacity and schedule.
-- Manage class slots for each date of a class.
 - Book a class for a specific date.
 - Track available class slots in real-time based on bookings.
 
@@ -45,7 +44,7 @@ To run this application, you need:
 
    - **Response**: 
      - `201 Created` on success.
-     - UNDERCONSTRUCTION
+     - `400 Bad Request` on fail of any missing arguments
 
 ### 2. **Book a Class**
    Book a slot for a specific date in a class.
@@ -69,12 +68,3 @@ To run this application, you need:
 
 Each class has associated slots based on the class capacity and schedule. Class slots are automatically created when a new class is added, for each day in the range between the `startDate` and `endDate`. Available slots are updated dynamically when a booking is made.
 
-
-## Actuator Endpoints
-
-This application includes Spring Boot Actuator for monitoring:
-
-- **Health Check**: `/actuator/health`
-- **Info**: `/actuator/info`
-```properties
-management.endpoints.web.exposure.include=*
