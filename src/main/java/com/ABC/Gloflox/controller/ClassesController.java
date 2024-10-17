@@ -2,7 +2,7 @@ package com.ABC.Gloflox.controller;
 
 
 
-import java.util.Date;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ABC.Gloflox.Entity.Classes;
 import com.ABC.Gloflox.Service.ClassService;
 import com.ABC.Gloflox.springDataJpa.ClassesJpaRepository;
+
+import jakarta.validation.Valid;
 
 
 
@@ -42,8 +44,14 @@ public class ClassesController {
 	}
 	
 	@PostMapping("/classes")
-	public ResponseEntity<String> creatingClasses(@RequestBody Classes obj) {
+	public ResponseEntity<String> creatingClasses(@Valid @RequestBody Classes obj) {
 		service.createClass(obj);
+		if(obj.getEndDate().isBefore(obj.getStartDate()) ) {
+			return new ResponseEntity<>(("Please check the Dates given"),HttpStatus.BAD_REQUEST);;
+		}
+		else if(obj.getClassName().isEmpty()) {
+			return new ResponseEntity<>(("Check Name of class it should be of atleast '2' characters"),HttpStatus.BAD_REQUEST);;
+		}
 		return new ResponseEntity<> (("Class has been created"),HttpStatus.CREATED);
 	}
 	
